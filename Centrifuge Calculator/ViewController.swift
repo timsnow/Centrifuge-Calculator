@@ -14,7 +14,7 @@ import Cocoa
 
 class ViewController: NSViewController, NSTextFieldDelegate {
     
-    
+    // Delcaring IBOutlets from the storyboard
     @IBOutlet weak var rpmInputField: NSTextField!
     @IBOutlet weak var xgInputField: NSTextField!
 
@@ -23,7 +23,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
     @IBOutlet weak var rotorLengthInputField: NSTextField!
 
-    
+    // If the view loaded, let's initialise with some default values and start listening...
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +39,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         rotorLengthInputField.delegate = self
         rotorLengthInputField.stringValue = "1"
         
+        // Update the labels with some calculated values
         gFromRPM()
         rpmFromG()
     }
@@ -51,6 +52,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     
     
     override func controlTextDidChange (notification: NSNotification) {
+        // Listen for NSNotifications when the input field values change and handle them
         if notification.object?.description == rpmInputField.description {
             gFromRPM()
         }
@@ -67,21 +69,29 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     
     
     func gFromRPM() {
+        // Do some maths based on the user input
+        // Start by getting the values from the input fields and converting them to floats
         var rpm = (rpmInputField.stringValue as NSString).floatValue
         var rotor = (rotorLengthInputField.stringValue as NSString).floatValue
         
+        // Then do the maths
         var result = pow((rpm/1000), 2) * rotor * 1.118
         
+        // Then update the label appropriately
         xgLabel.stringValue = String(format: "%5.3f", result)
     }
     
     
     func rpmFromG() {
+        // Do some maths based on the user input
+        // Start by getting the values from the input fields and converting them to floats
         var g = (xgInputField.stringValue as NSString).floatValue
         var rotor = (rotorLengthInputField.stringValue as NSString).floatValue
         
+        // Then do the maths
         var result = sqrt((g / (rotor * 1.118))) * 1000
         
+        // Then update the label appropriately        
         rpmLabel.stringValue = String(format: "%5.3f", result)
     }
     
