@@ -14,6 +14,7 @@ import Cocoa
 
 class ViewController: NSViewController, NSTextFieldDelegate {
     
+    
     // Delcaring IBOutlets from the storyboard
     @IBOutlet weak var rpmInputField: NSTextField!
     @IBOutlet weak var xgInputField: NSTextField!
@@ -23,6 +24,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
     @IBOutlet weak var rotorLengthInputField: NSTextField!
 
+    
     // If the view loaded, let's initialise with some default values and start listening...
     override func viewDidLoad() {
         super.viewDidLoad()
